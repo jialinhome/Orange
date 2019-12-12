@@ -16,4 +16,32 @@ javascript的number类型在计算机上采用双精度格式存储，占用64�
 
 这里，0.1与0.2的二进制表示都是无限的，所以计算机会进行截取，导致失真。
 
+## [JSON.stringify()](https://juejin.im/post/5decf09de51d45584d238319?utm_source=gold_browser_extension)
+
+平时用的`JSON.stringify()`其实有很多细节需要注意，比如当`undefined`、`Symbol`以及`function`为value值的情况下，序列化的结果如何表现，这个要是没接触过肯定不会知道。
+
+```javascript
+const data = {
+  a: "aaa",
+  b: undefined,
+  c: Symbol("dd"),
+  fn: function() {
+    return true;
+  },
+  d: "ddd"
+};
+JSON.stringify(data); // 输出：？
+// "{"a":"aaa","d":"ddd"}"
+
+JSON.stringify(["aaa", undefined, function aa() {
+    return true
+  }, Symbol('dd'),"eee"])  // 输出：？
+
+// "["aaa",null,null,null,"eee"]"
+```
+
+通过上面的代码，可以看出端倪。
+
+
+
 
