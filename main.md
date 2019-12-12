@@ -1,6 +1,6 @@
 # 2019-12-12
 
-## [聊聊Chrome DevTools中你可能不知道的调试技巧](https://zhuanlan.zhihu.com/p/42059158)
+## [Chrome DevTools调试小技巧](https://zhuanlan.zhihu.com/p/42059158)
 
 刚才看到了个不错的浏览器调试小技巧，主要包括以下几点：
 
