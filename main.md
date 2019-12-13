@@ -42,6 +42,8 @@ JSON.stringify(["aaa", undefined, function aa() {
 
 通过上面的代码，可以看出端倪。
 
+# 2019-12-13
+
 ## 尝试系统中引入react-hot-loader，以失败告终😿
 
 本打算引入react-hot-loader，但是没有生效，试了很久，初步发现可能是引入顺序的问题，因为dll会先于react-hot-loader引入，而且react-hot-loader也快要被废弃了，索性就不引用了吧
