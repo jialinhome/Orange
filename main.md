@@ -48,4 +48,19 @@ JSON.stringify(["aaa", undefined, function aa() {
 
 本打算引入react-hot-loader，但是没有生效，试了很久，初步发现可能是引入顺序的问题，因为dll会先于react-hot-loader引入，而且react-hot-loader也快要被废弃了，索性就不引用了吧
 
+## [script error 复现](https://juejin.im/post/5df3522751882512302db3ca?utm_source=gold_browser_extension)
+
+1. 录制视频
+
+a) canvas 截取图片，该方法的实现思路是利用 canvas 将网页生成图片，然后缓存起来，为了使得生成的视频流畅，我们一秒中需要生成大约 25 帧，也就是需要 25 张截图，然后在出现 script error 时将缓存起来的页面图片进行上报，再在分析系统通过技术将页面浏览进行还原。
+
+b) 该方法主要是记录用户页面 dom 的变化，然后在出现 script error 时将对应的记录进行上报，然后在分析系统里通过技术将页面还原。
+
+> 1. 进入页面，生成页面的虚拟dom全量快照；
+> 2. 运用 API：MutationObserver，记录用户变化的 dom，同时记录用户的一些行操作（click，select，input，scroll 等事件）；
+> 3. 当出现 script error 时将对应快照信息上报；
+> 4. 在分析系统中将快照与用用户的操作还原。
+
+
+
 
