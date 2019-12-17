@@ -65,6 +65,8 @@ b) 该方法主要是记录用户页面 dom 的变化，然后在出现 script e
 
 ## 雨人
 
+![](http://m.imeitou.com/uploads/allimg/2019071518/y4gvnjovviz.jpg)
+
 我相信我爱你
 
 蒙上眼手交给你
