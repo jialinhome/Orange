@@ -66,12 +66,104 @@ b) 该方法主要是记录用户页面 dom 的变化，然后在出现 script e
 ## 雨人
 
 我相信我爱你
+
 蒙上眼手交给你
+
 慢慢的安心在黑暗中
+
 共有一双眼睛
+
 我要不断地爱你
+
 不断拼凑了自己
+
 生命中所有好不好的过去
+
 仿佛都在等我遇见你
 
+## 俄罗斯套娃
 
+刚才看Promise的实现原理，突然联想到俄罗斯套娃，这个Promise不就是一个俄罗斯套娃么，哈哈哈，一个套一个，最后还是那个娃，哎呀呀，哈哈哈。
+
+俄罗斯套娃的实现：
+
+```javascript
+function isFunction(fn) {
+  return typeof fn === 'function';
+}
+
+const PENDING = 'pending';
+const FULFILLED = 'fulfilled';
+const REJECTED = 'rejected';
+
+function Promise(executor) {
+  const that = this;
+  that.val = undefined;
+  that.err = undefined;
+  that.status = PENDING;
+  that.fulfilledCallbacks = []; // 存放then方法注册的回调函数
+  that.rejectedCallbacks = []; // 存放then方法注册的回调函数
+
+  function resolve(val) {
+    if (that.status === PENDING) { // 一旦状态改变，就不会再变
+      // 用异步的方式调用，确保晚于then函数执行，同时可以确保即便是在execotor中同步调用resolve，promise还是异步的
+      setTimeout(function () {
+        that.val = val;
+        that.status = FULFILLED;
+        that.fulfilledCallbacks.forEach(function (fun) {
+          fun(val);
+        });
+      }, 0);
+    }
+  }
+
+  function reject(err) {
+    if (that.status === PENDING) { // 一旦状态改变，就不会再变
+      setTimeout(function () {
+        that.val = err;
+        that.status = REJECTED;
+        that.rejectedCallbacks.forEach(function (fun) {
+          fun(err)
+        })
+      });
+    }
+  }
+  
+  executor(resolve, reject);
+}
+
+Promise.prototype.then = function (onFulfilled, onRejected) {
+  const that = this;
+  let promise2;
+
+  onFulfilled = isFunction(onFulfilled) ? onFulfilled : function (value) {
+    return value
+  };
+  
+  onRejected = isFunction(onRejected) ? onRejected : function (err) {
+    throw err;
+  };
+
+  promise2 = new Promise(function (resolve, reject) {
+    that.fulfilledCallbacks.push(function (value) {
+      try {
+        let x = onFulfilled(value);
+        resolve(x);
+      } catch (e) {
+        reject(e);
+      }
+    });
+    
+    that.rejectedCallbacks.push(function (err) {
+      try {
+        let x = onRejected(err);
+        resolve(x);
+      } catch (e) {
+        reject(e);
+      }
+    });
+  });
+
+  return promise2;
+};
+```
