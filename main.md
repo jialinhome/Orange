@@ -169,3 +169,20 @@ Promise.prototype.then = function (onFulfilled, onRejected) {
   return promise2;
 };
 ```
+
+# 2019-12-26
+
+## [家用路由器中间人劫持](https://www.cert.pl/en/large-scale-dns-redirection-on-home-routers-for-financial-theft/)
+
+刚才看了有关路由器DNS劫持中间人攻击相关原理，在此记录：
+
+![](https://www.cert.pl/wp-content/uploads/2014/02/2014-02-mitr-good.png)
+
+正常：
+(1). Router requests IP address of bank’s website. Gets bank’s server’s address in reponse.
+(2). User connects to bank’s server.		
+
+被劫持：
+(1). Router requests IP address of bank’s website. Gets malicious server’s address in response.
+(2). User connects to malicious server.
+(3). Malicious server connects to bank’s server.
