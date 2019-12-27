@@ -196,3 +196,11 @@ Promise.prototype.then = function (onFulfilled, onRejected) {
 2、5.1.0版本后 npm install 会无视lock文件 去下载最新的npm 然后有人提了这个issue why is package-lock being ignored? · Issue #17979 · npm/npm控诉这个问题，最后演变成5.4.2版本后的规则。
 
 3、5.4.2版本后  why is package-lock being ignored? · Issue #17979 · npm/npm大致意思是，如果改了package.json，且package.json和lock文件不同，那么执行`npm i`时npm会根据package中的版本号以及语义含义去下载最新的包，并更新至lock。如果两者是同一状态，那么执行`npm i `都会根据lock下载，不会理会package实际包的版本是否有新。
+
+# 2019-12-27
+
+## [package.json中 ~ 与 ^](https://yarn.bootcss.com/docs/dependency-versions/)
+
+语义版本控制（Semantic Versioning）
+
+版本可以表示为
