@@ -1,6 +1,6 @@
-# Oriange
+# Orange
 
-why oriange?
+why orange?
 
 午后斜阳，暖暖橘黄。
 
